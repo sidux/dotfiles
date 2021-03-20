@@ -9,11 +9,11 @@ function bundle() {
   declare -a arr=("$path/init.zsh" "$path/init.sh" "$path/$name.zsh" "$path/$name.sh")
 
   if [[ ! -d "$path" ]]; then
-    if ! /usr/local/bin/git ls-remote -q "$repo_url" >/dev/null; then
+    if ! git ls-remote -q "$repo_url" >/dev/null; then
       echo "Module $repo does not exist."
       return 1
     fi
-    /usr/local/bin/git clone --recursive "$repo_url" "$path"
+    git clone --recursive "$repo_url" "$path"
   fi
 
   for file in "${arr[@]}"; do
