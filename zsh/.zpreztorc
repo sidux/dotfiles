@@ -1,0 +1,117 @@
+{
+  # Compile the completion dump to increase startup speed.
+  zcompdump="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/zcompdump"
+  if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
+    zcompile "$zcompdump"
+  fi
+} &!
+
+# Set case-sensitivity for completion, history lookup, etc.
+# zstyle ':prezto:*:*' case-sensitive 'yes'
+
+# Color output (auto set to 'no' on dumb terminals).
+zstyle ':prezto:*:*' color 'yes'
+
+# Allow module overrides when pmodule-dirs causes module name collisions
+# zstyle ':prezto:load' pmodule-allow-overrides 'yes'
+
+# Set the Zsh modules to load (man zshmodules).
+# zstyle ':prezto:load' zmodule 'attr' 'stat'
+
+# Set the Zsh functions to load (man zshcontrib).
+# zstyle ':prezto:load' zfunction 'zargs' 'zmv'
+
+# Set the Prezto modules to load (browse modules).
+# The order matters.
+zstyle ':prezto:load' pmodule \
+  'environment' \
+  'terminal' \
+  'editor' \
+  'history' \
+  'directory' \
+  'spectrum' \
+  'utility' \
+  'completion' \
+  'prompt' \
+  'syntax-highlighting' \
+  'history' \
+  'history-substring-search' \
+  'autosuggestions' \
+  'git' \
+  'helper' \
+  'osx' \
+  'archive' \
+  'command-not-found' \
+
+zstyle ':prompt:pure:git:stash' show 'yes'
+
+# Set the key mapping style to 'emacs' or 'vi'.
+zstyle ':prezto:module:editor' key-bindings 'vi'
+
+# Auto convert .... to ../..
+zstyle ':prezto:module:editor' dot-expansion 'yes'
+
+# Allow the zsh prompt context to be shown.
+zstyle ':prezto:module:editor' ps-context 'yes'
+
+# Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
+zstyle ':prezto:module:git:status:ignore' submodules 'all'
+
+
+# Set the command prefix on non-GNU systems.
+# zstyle ':prezto:module:gnu-utility' prefix 'g'
+
+# Set the prompt theme to load.
+# Setting it to 'random' loads a random theme.
+# Auto set to 'off' on dumb terminals.
+zstyle ':prezto:module:prompt' theme 'pure'
+PURE_PROMPT_SYMBOL='🐒 '
+
+# Set the working directory prompt display length.
+# By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
+# for longer or 'full' (with '~' expansion) for even longer prompt display.
+zstyle ':prezto:module:prompt' pwd-length 'short'
+
+# Set the prompt to display the return code along with an indicator for non-zero
+# return codes. This is not supported by all prompts.
+zstyle ':prezto:module:prompt' show-return-val 'yes'
+
+# Auto start a session when Zsh is launched in a local terminal.
+# zstyle ':prezto:module:screen:auto-start' local 'yes'
+
+# Auto start a session when Zsh is launched in a SSH connection.
+# zstyle ':prezto:module:screen:auto-start' remote 'yes'
+
+# Set the SSH identities to load into the agent.
+# zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_github'
+
+# Set syntax highlighters.
+# By default, only the main highlighter is enabled.
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'pattern' \
+  'line' \
+  'cursor' \
+  'root'
+
+# Auto set the tab and window titles.
+zstyle ':prezto:module:terminal' auto-title 'yes'
+
+# Set the window title format.
+zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
+
+# Set the tab title format.
+zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
+
+# Set the terminal multiplexer title format.
+zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
+
+# Enabled safe options. This aliases cp, ln, mv and rm so that they prompt
+# before deleting or overwriting files. Set to 'no' to disable this safer
+# behavior.
+zstyle ':prezto:module:utility' safe-ops 'yes'
+
+
+# zstyle ":prezto:module:enhancd" filter "fzf:fzy:peco"
+# zstyle ":prezto:module:enhancd" command "cd"
