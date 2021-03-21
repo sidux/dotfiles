@@ -1,5 +1,3 @@
-echo 'Using antigen ...'
-
 if [[ ! -s "${ZDOTDIR:-$HOME}/antigen.zsh" ]]; then
     curl -L git.io/antigen > "${ZDOTDIR:-$HOME}"/antigen.zsh
 fi
@@ -10,5 +8,6 @@ antigen use prezto
 
 antigen bundle zsh-users/zsh-apple-touchbar
 antigen bundle supercrabtree/k
+bundle rupa/z
 
 antigen apply
