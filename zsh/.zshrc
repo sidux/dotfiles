@@ -1,10 +1,18 @@
 autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+re_initialize=0
+for match in $zcompdump*(.Nmh+24); do
+  re_initialize=1
+  break
+done
 
-	compinit;
+if [ "$re_initialized" -eq "1" ]; then
+  compinit
+  # update the timestamp on compdump file
+  compdump
 else
-	compinit -C;
-fi;
+  # omit the check for new functions since we updated today
+  compinit -C
+fi
 
 # Execute code only if STDERR is bound to a TTY.
 if [[ -o INTERACTIVE && -t 2 ]]; then
@@ -29,3 +37,5 @@ source ~/dotfiles/zsh/"${ZSH_BUNDLER:-prezto}".zshrc
 
 alias xdebug='php -dzend_extension=xdebug.so'
 alias pcov='php -dextension=pcov'
+alias afk='open -a /System/Library/CoreServices/ScreenSaverEngine.app'
+alias pr='gh pr create --web'
