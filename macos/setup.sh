@@ -76,7 +76,7 @@ defaults write com.apple.dock mouse-over-hilite-stack -bool true
 defaults write com.apple.dock show-recents -bool false
 
 # Top left screen corner → Mission Control
-defaults write com.apple.dock wvous-l-corner -int 2
+defaults write com.apple.dock wvous-tl-corner -int 2
 defaults write com.apple.dock wvous-tl-modifier -int 0
 
 # Top right screen corner → Desktop
