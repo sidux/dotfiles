@@ -1,3 +1,17 @@
+## enable touchID instead of password on sudo
+function sudo_touch() {
+  if cat /etc/pam.d/sudo | grep -q 'auth sufficient pam_tid.so'; then
+    echo 'Already existing.'
+    return;
+  fi
+  sudo cp /etc/pam.d/sudo /etc/pam.d/sudo.bak &&
+  echo 'auth sufficient pam_tid.so' | cat - /etc/pam.d/sudo | sudo tee /etc/pam.d/sudo > /dev/null
+  echo "If you are using Iterm please turn off Prefs > Advanced > Allow sessions to survive logging out and back in"
+}
+sudo_touch
+
+
+
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
