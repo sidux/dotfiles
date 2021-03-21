@@ -1,7 +1,3 @@
-setopt EXTENDED_GLOB
-
-export LC_ALL=en_US.UTF-8
-
 #
 # Browser
 #
@@ -41,6 +37,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  /opt/homebrew/{bin,sbin}
   $path
 )
 

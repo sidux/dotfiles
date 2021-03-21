@@ -14,6 +14,8 @@ else
   compinit -C
 fi
 
+setopt EXTENDED_GLOB
+
 # Execute code only if STDERR is bound to a TTY.
 if [[ -o INTERACTIVE && -t 2 ]]; then
   # Print a random, hopefully interesting, adage.
@@ -32,8 +34,9 @@ source ~/dotfiles/util.zsh
 source ~/dotfiles/iterm/.iterm2_shell_integration.zsh
 source ~/dotfiles/zsh/plugin/symfony.plugin.zsh
 source ~/dotfiles/zsh/.zpreztorc
-
 source ~/dotfiles/zsh/"${ZSH_BUNDLER:-prezto}".zshrc
+
+export LC_ALL=en_US.UTF-8
 
 alias xdebug='php -dzend_extension=xdebug.so'
 alias pcov='php -dextension=pcov'
