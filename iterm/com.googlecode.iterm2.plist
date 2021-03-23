@@ -2294,7 +2294,7 @@
 			<key>Has Hotkey</key>
 			<true/>
 			<key>Hide After Opening</key>
-			<true/>
+			<false/>
 			<key>Horizontal Spacing</key>
 			<real>1</real>
 			<key>HotKey Activated By Modifier</key>
@@ -2787,6 +2787,10 @@
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
+			<key>Send New Output Alert</key>
+			<false/>
+			<key>Send Terminal Generated Alerts</key>
+			<true/>
 			<key>Shortcut</key>
 			<string></string>
 			<key>Show Status Bar</key>
