@@ -7,7 +7,7 @@
 	<key>AlternateMouseScroll</key>
 	<true/>
 	<key>BootstrapDaemon</key>
-	<false/>
+	<true/>
 	<key>CheckTestRelease</key>
 	<false/>
 	<key>Coprocess MRU</key>
@@ -2729,7 +2729,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Menlo-Regular 11</string>
+			<string>SourceCodeProForPowerline-Regular 12</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<true/>
 			<key>Open Toolbelt</key>
