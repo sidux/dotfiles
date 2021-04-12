@@ -37,6 +37,7 @@ source ~/dotfiles/zsh/.zpreztorc
 source ~/dotfiles/zsh/"${ZSH_BUNDLER:-prezto}".zshrc
 
 export LC_ALL=en_US.UTF-8
+export JAVA_HOME=$(/usr/libexec/java_home)
 
 alias xdebug='php -dzend_extension=xdebug.so'
 alias pcov='php -dextension=pcov'

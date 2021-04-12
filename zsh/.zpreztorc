@@ -65,7 +65,7 @@ zstyle ':prezto:module:git:status:ignore' submodules 'all'
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'pure'
-PURE_PROMPT_SYMBOL='🐒 '
+PURE_PROMPT_SYMBOL='> '
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
