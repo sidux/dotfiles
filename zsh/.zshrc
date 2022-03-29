@@ -30,11 +30,12 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) ]]; then
   source ~/dotfiles/zsh/.zprofile
 fi
 
-source ~/dotfiles/util.zsh
-source ~/dotfiles/iterm/.iterm2_shell_integration.zsh
-source ~/dotfiles/zsh/plugin/symfony.plugin.zsh
-source ~/dotfiles/zsh/.zpreztorc
-source ~/dotfiles/zsh/"${ZSH_BUNDLER:-prezto}".zshrc
+if [ -z "$INTELLIJ_ENVIRONMENT_READER" ]; then
+  source ~/dotfiles/util.zsh
+  source ~/dotfiles/iterm/.iterm2_shell_integration.zsh
+  source ~/dotfiles/zsh/.zpreztorc
+  source ~/dotfiles/zsh/"${ZSH_BUNDLER:-prezto}".zshrc
+fi
 
 export LC_ALL=en_US.UTF-8
 export JAVA_HOME=$(/usr/libexec/java_home)
