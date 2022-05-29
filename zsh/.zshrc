@@ -48,7 +48,7 @@ bindkey "^X\\x7f" backward-kill-line
 bindkey "^X^_" redo
 
 export LC_ALL=en_US.UTF-8
-export JAVA_HOME=$(/usr/libexec/java_home)
+# export JAVA_HOME=$(/usr/libexec/java_home)
 
 alias xdebug='php -dzend_extension=xdebug.so'
 alias sf='php app/console'
