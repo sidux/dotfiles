@@ -37,10 +37,22 @@ if [ -z "$INTELLIJ_ENVIRONMENT_READER" ]; then
   source ~/dotfiles/zsh/"${ZSH_BUNDLER:-prezto}".zshrc
 fi
 
+# changes hex 0x15 to delete everything to the left of the cursor,
+# rather than the whole line
+bindkey "^U" backward-kill-line
+
+# binds hex 0x18 0x7f with deleting everything to the left of the cursor
+bindkey "^X\\x7f" backward-kill-line
+
+# adds redo
+bindkey "^X^_" redo
+
 export LC_ALL=en_US.UTF-8
 export JAVA_HOME=$(/usr/libexec/java_home)
 
 alias xdebug='php -dzend_extension=xdebug.so'
+alias sf='php app/console'
+alias sfx='xdebug app/console'
 alias pcov='php -dextension=pcov'
 alias afk='open -a /System/Library/CoreServices/ScreenSaverEngine.app'
 alias pr='gh pr create --web'
