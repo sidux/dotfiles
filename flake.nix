@@ -31,6 +31,7 @@
         # Home Manager configuration
         home-manager.darwinModules.home-manager
         {
+          home-manager.backupFileExtension = "backup";
           home-manager.useGlobalPkgs = true;  # Use global packages in home-manager
           home-manager.useUserPackages = true;  # Install user packages to /etc/profiles
           home-manager.users.${user} = { pkgs, ... }: {
@@ -45,6 +46,31 @@
               extraConfig = {
                 core.editor = "vim";  # Set VS Code as the default Git editor
                 color.ui = true;  # Enable colorized output in Git
+              };
+            };
+
+            programs.fish = {
+              enable = true;
+              # useBabelfish = true;  # Enable Babelfish for improved shell compatibility
+              interactiveShellInit = ''
+                set fish_greeting # Disable greeting
+                starship init fish | source # Initialize starship prompt
+              '';
+              shellAliases = {
+                # Add your aliases here
+                ll = "ls -l";
+                la = "ls -la";
+              };
+            };
+
+            programs.starship = {
+              enable = true;
+              settings = {
+                add_newline = false;
+                character = {
+                  success_symbol = "[➜](bold green)";
+                  error_symbol = "[➜](bold red)";
+                };
               };
             };
 
@@ -80,6 +106,7 @@
             hidden-bar
             monitorcontrol
             jankyborders
+            starship
           ];
 
           # Shell configurations
@@ -144,49 +171,49 @@
             };
           };
 
-      homebrew = {
-          enable = true;
-          global.autoUpdate = false;
+          homebrew = {
+            enable = true;
+            global.autoUpdate = false;
 
-          onActivation = {
-            # "zap" removes manually installed brews and casks
-            cleanup = "zap";
-            autoUpdate = false;
-            upgrade = false;
-          };
+            onActivation = {
+              # "zap" removes manually installed brews and casks
+              cleanup = "zap";
+              autoUpdate = false;
+              upgrade = false;
+            };
 
-          brews = [
+            brews = [
+            ];
+
+            casks = [
+              "jetbrains-toolbox"
+              # utilities
+              "aldente" # battery management
+              # "macfuse" # file system utilities
+              # "karabiner-elements" # keyboard remap
+              "nikitabobko/tap/aerospace" # tiling window manager
+
+              # virtualization
+              # "docker" # docker desktop
+
+              "sf-symbols" # patched font for sketchybar
+              "time-out" # blurs screen every x mins
+              "keycastr" # show keystrokes on screen
+              "obsidian" # note taking
+              "zed" # vim like editor
+              "steam"
+              "google-chrome"
+            ];
+            
+
+            taps = [
+              # default
+              "homebrew/bundle"
+              "homebrew/services"
+            ];
+            };
+            })
           ];
-
-          casks = [
-            "jetbrains-toolbox"
-            # utilities
-            "aldente" # battery management
-            # "macfuse" # file system utilities
-            # "karabiner-elements" # keyboard remap
-            "nikitabobko/tap/aerospace" # tiling window manager
-
-            # virtualization
-            # "docker" # docker desktop
-
-            "sf-symbols" # patched font for sketchybar
-            "time-out" # blurs screen every x mins
-            "keycastr" # show keystrokes on screen
-            "obsidian" # note taking
-            "zed" # vim like editor
-            "steam"
-            "google-chrome"
-          ];
-          
-
-          taps = [
-            # default
-            "homebrew/bundle"
-            "homebrew/services"
-          ];
-        };
-        })
-      ];
     };
 
     # Expose the package set for convenience
