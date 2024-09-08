@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if ! command -v nix &> /dev/null
+then
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+fi
+
 # Path to your flake.nix file
 FLAKE_FILE="$HOME/dotfiles/flake.nix"
 
