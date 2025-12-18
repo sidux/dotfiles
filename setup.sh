@@ -1,39 +1,26 @@
 #!/bin/bash
 
-if ! command -v nix &> /dev/null
-then
+# Install nix if not present
+if ! command -v nix &> /dev/null; then
     curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 fi
 
-# Path to your flake.nix file
-FLAKE_FILE="$HOME/dotfiles/flake.nix"
+# Get the directory where this script lives
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Get the current hostname
-CURRENT_HOSTNAME=$(hostname -s)
-CURRENT_USER=$(whoami)
+# Export hostname for flake (macOS doesn't set HOSTNAME by default)
+export HOSTNAME=$(hostname -s)
 
-echo "Current hostname: $CURRENT_HOSTNAME"
+echo "Building nix-darwin for user: $USER, host: $HOSTNAME"
 
-# Temporary file for sed operation
-TEMP_FILE=$(mktemp)
-
-sed -e "s/\"<host>\"/\"$CURRENT_HOSTNAME\"/g" \
-    -e "s/\"<user>\"/\"$CURRENT_USER\"/g" "$FLAKE_FILE" > "$TEMP_FILE"
-mv "$TEMP_FILE" "$FLAKE_FILE"
-
-echo "Hostname updated in flake.nix"
-
-# Build and activate the configuration
-nix --extra-experimental-features "nix-command flakes" build ".#darwinConfigurations.$CURRENT_HOSTNAME.system"
+# Build and activate (--impure allows reading environment variables)
+nix build "$SCRIPT_DIR#darwinConfigurations.$HOSTNAME.system" \
+    --extra-experimental-features "nix-command flakes" \
+    --impure
 
 if [ -e ./result/sw/bin/darwin-rebuild ]; then
-    ./result/sw/bin/darwin-rebuild switch --flake ".#$CURRENT_HOSTNAME"
+    sudo ./result/sw/bin/darwin-rebuild switch --flake "$SCRIPT_DIR#$HOSTNAME" --impure
 else
-    echo "Error: darwin-rebuild not found in expected location. The build may have failed."
+    echo "Error: darwin-rebuild not found. Build may have failed."
+    exit 1
 fi
-
-sed -e "s/\"$CURRENT_HOSTNAME\"/\"<host>\"/g" \
-    -e "s/\"$CURRENT_USER\"/\"<user>\"/g" "$FLAKE_FILE" > "$TEMP_FILE"
-mv "$TEMP_FILE" "$FLAKE_FILE"
-
-echo "Hostname restored in flake.nix"

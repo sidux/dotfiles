@@ -1,3 +1,8 @@
-!*.zip
-antibody.zsh_plugins.sh
+# Nix build output
 result
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
