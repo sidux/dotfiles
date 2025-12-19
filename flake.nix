@@ -300,12 +300,6 @@
             mkcert                                 # Local HTTPS certificates
             httpie                                 # Modern HTTP client (like curl)
 
-            # === Fonts ===
-            jetbrains-mono                         # Coding font with ligatures
-            nerd-fonts.jetbrains-mono              # Nerd Font patched version
-            nerd-fonts.fira-code
-            nerd-fonts.hack
-
             # === macOS Utilities ===
             mysides                                # Manage Finder sidebar
             stats                                  # System monitor in menu bar
@@ -314,6 +308,14 @@
             monitorcontrol                         # Control external monitor brightness
             jankyborders                           # Window borders for tiling WM
             uv                                     # Fast Python package/project manager
+          ];
+
+          # ----- Fonts (macOS requires fonts.packages for GUI apps) -----
+          fonts.packages = with pkgs; [
+            jetbrains-mono                         # Coding font with ligatures
+            nerd-fonts.jetbrains-mono              # Nerd Font patched version (for terminal icons)
+            nerd-fonts.fira-code
+            nerd-fonts.hack
           ];
 
           # ----- Shell Configuration -----
