@@ -33,6 +33,8 @@
     envHost = builtins.getEnv "HOSTNAME";
     user = if envUser == "" || envUser == "root" then builtins.getEnv "SUDO_USER" else envUser;
     host = if envHost == "" then "macbook" else envHost;
+    gitUserName = let v = builtins.getEnv "GIT_USER_NAME"; in if v == "" then "sidux" else v;
+    gitUserEmail = let v = builtins.getEnv "GIT_USER_EMAIL"; in if v == "" then "ahmed.lebbada@gmail.com" else v;
   in
   {
     darwinConfigurations."${host}" = darwin.lib.darwinSystem {
@@ -58,8 +60,8 @@
                 ".envrc.local"        # Local direnv overrides
               ];
               settings = {
-                user.name = "sidux";
-                user.email = "ahmed.lebbada@gmail.com";
+                user.name = gitUserName;
+                user.email = gitUserEmail;
                 core.editor = "vim";
                 color.ui = true;
                 init.defaultBranch = "main";
