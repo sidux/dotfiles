@@ -2,6 +2,8 @@
   description = "Personal Darwin system flake with home-manager";
 
   inputs = {
+    # Update devenv independently of the rest of the workstation.
+    devenv.url = "github:cachix/devenv/v2.3.1";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     darwin = {
       url = "github:lnl7/nix-darwin";
@@ -23,7 +25,7 @@
     };
   };
 
-  outputs = inputs@{ self, darwin, nixpkgs, home-manager, nix-homebrew, homebrew-core, homebrew-cask }:
+  outputs = inputs@{ self, devenv, darwin, nixpkgs, home-manager, nix-homebrew, homebrew-core, homebrew-cask }:
   let
     system = "aarch64-darwin";  # ARM-based macOS (Apple Silicon)
     pkgs = nixpkgs.legacyPackages.${system};
@@ -288,7 +290,7 @@
             btop                                   # Modern resource monitor with graphs
 
             # === Development Tools ===
-            devenv                                 # Declarative developer environments
+            inputs.devenv.packages.${system}.devenv # Declarative developer environments
             jq                                     # JSON processor
             yq-go                                  # YAML processor (like jq for YAML)
             nodejs_22                              # Node.js LTS runtime
