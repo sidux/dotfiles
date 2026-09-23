@@ -97,8 +97,13 @@
                 zoxide init fish | source         # Smart cd that learns your habits
                 fzf --fish | source               # Fuzzy finder keybindings (Ctrl+R, Ctrl+T)
                 direnv hook fish | source         # Per-directory environments
+                if type -q npm
+                  fish_add_path (npm prefix -g)/bin
+                end
                 fish_add_path ~/Library/flutter/bin
                 fish_add_path ~/.local/bin
+                fish_add_path ~/.local/google-cloud-sdk/bin
+                fish_add_path ~/.opencode/bin
               '';
               shellAliases = {
                 # Modern CLI replacements
@@ -291,6 +296,7 @@
 
             # === Development Tools ===
             inputs.devenv.packages.${system}.devenv # Declarative developer environments
+            temurin-bin-21 # Eclipse Temurin JDK 21 (for Android/Gradle)
             jq                                     # JSON processor
             yq-go                                  # YAML processor (like jq for YAML)
             nodejs_22                              # Node.js LTS runtime

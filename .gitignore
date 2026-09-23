@@ -6,3 +6,6 @@ result
 
 # IDE
 .idea/
+
+# Local maintenance helper; it removes host caches and Trash.
+/scripts/cleanup.sh
